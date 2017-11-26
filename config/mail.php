@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    'host' => env('MAIL_HOST', 'smtp.mailtrap.io'),
 
     /*
     |--------------------------------------------------------------------------
@@ -42,7 +42,7 @@ return [
     |
     */
 
-    'port' => env('MAIL_PORT', 587),
+    'port' => env('MAIL_PORT', 2525),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => env('MAIL_FROM_ADDRESS', 'contacto@licitapp.cl'),
+        'name' => env('MAIL_FROM_NAME', 'Licitapp'),
     ],
 
     /*
@@ -84,9 +84,9 @@ return [
     |
     */
 
-    'username' => env('MAIL_USERNAME'),
+    'username' => env('ce7a792e2abecc'),
 
-    'password' => env('MAIL_PASSWORD'),
+    'password' => env('9de6b08139ca05'),
 
     /*
     |--------------------------------------------------------------------------
@@ -100,6 +100,7 @@ return [
     */
 
     'sendmail' => '/usr/sbin/sendmail -bs',
+    "pretend" => 'false',
 
     /*
     |--------------------------------------------------------------------------
