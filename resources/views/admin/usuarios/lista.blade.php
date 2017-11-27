@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Panel de administracion</div>
+                <div class="panel-heading">Usuarios registrados</div>
 
                 <div class="panel-body">
                     @if (session('status'))
@@ -14,10 +14,13 @@
                         </div>
                     @endif
                    
-                  <div class="list-group">
-                      <a href="{{url('/admin/usuarios/')}}" class="list-group-item">CRUD usuarios</a>
-                      <a href="{{url('/log-viewer')}}" class="list-group-item">Ver log de registro</a>
-                      <a href="#" class="list-group-item">Pronto.. nueva herramienta</a>
+            <ul class="list-group">
+            @foreach($users as $usuario)
+              <li class="list-group-item">{{$usuario->name}}</li>
+@endforeach
+</ul>
+<div>
+<a href="{{url('/admin/usuarios')}}" class="btn btn-info" role="button">Volver</a>
 </div>
                         </div>
                         </div>

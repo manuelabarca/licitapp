@@ -16,7 +16,7 @@
 
                   <span>Licitaciones</span>
                   <ul class="list-group">
-  <li class="list-group-item">Han cambiado de estado:<span class="badge">{{ $licitaciones->Cantidad }}</span></li>
+  <li class="list-group-item">Han cambiado de estado<span class="badge">{{ $licitaciones->Cantidad }}</span></li>
 
 
                    <!--Contador publicadas -->

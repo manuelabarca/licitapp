@@ -12,6 +12,10 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+
+
+    
 </head>
 <body>
     <div id="app">
@@ -57,7 +61,7 @@
                                 @if(Auth::user()->estado == 3)
                                 <li><a href="{{ url('/admin') }}">Backoffice</a></li>
                                  @endif
-                                <li><a href="{{ url('/inicio') }}">Inicio</a></li> 
+                                <li><a href="{{ url('/home') }}">Inicio</a></li> 
                                 <li><a href="{{ url('/rubro') }}">Mi rubro</a></li>
                                 <li><a href="{{ url('/licitaciones') }}">Licitaciones</a></li>
                                 <li><a href="{{ url('/herramientas') }}">Herramientas</a></li>
@@ -94,5 +98,32 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
+        <script src="{{ asset('js/licitapp.js') }}"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script>
+    @if(Session::has('message'))
+        var type="{{Session::get('alert-type','info')}}"
+
+
+        switch(type){
+            case 'info':
+                 toastr.info("{{ Session::get('message') }}");
+                 break;
+            case 'success':
+                toastr.success("{{ Session::get('message') }}");
+                break;
+            case 'warning':
+                toastr.warning("{{ Session::get('message') }}");
+                break;
+            case 'error':
+                toastr.error("{{ Session::get('message') }}");
+                break;
+        }
+    @endif
+</script>
+
 </body>
 </html>

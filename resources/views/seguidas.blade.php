@@ -5,7 +5,13 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Panel de administracion</div>
+            @php
+            $contador = 0;
+            @endphp
+            @foreach($siguiendo as $seguir)
+            @php $contador++; @endphp
+            @endforeach
+                <div class="panel-heading">Licitaciones seguidas <span class="badge">{{$contador}}</span></div>
 
                 <div class="panel-body">
                     @if (session('status'))
@@ -13,12 +19,13 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                   
-                  <div class="list-group">
-                      <a href="{{url('/admin/usuarios/')}}" class="list-group-item">CRUD usuarios</a>
-                      <a href="{{url('/log-viewer')}}" class="list-group-item">Ver log de registro</a>
-                      <a href="#" class="list-group-item">Pronto.. nueva herramienta</a>
-</div>
+                   @foreach($siguiendo as $seguir)
+            <ul class="list-group">
+            <a href="{{ url('/') }}/buscarL?codigo={{ $seguir->codigo }}" class="list-group-item">{{$seguir->codigo}}</a>
+             
+@endforeach
+</ul>
+
                         </div>
                         </div>
                         </div>

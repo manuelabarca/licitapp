@@ -15,9 +15,13 @@
                     @endif
                    
                   <div class="list-group">
-                      <a href="{{url('/admin/usuarios/')}}" class="list-group-item">CRUD usuarios</a>
-                      <a href="{{url('/log-viewer')}}" class="list-group-item">Ver log de registro</a>
-                      <a href="#" class="list-group-item">Pronto.. nueva herramienta</a>
+                      <a href="{{url('/admin/usuarios/crear')}}" class="list-group-item">Crear usuario</a>
+                      <a href="{{url('/admin/usuarios/lista')}}" class="list-group-item">Lista de usuarios registrados</a>
+                      <a href="#" class="list-group-item">Editar usuario</a>
+                      <a href="#" class="list-group-item">Eliminar usuario</a>
+</div>
+<div>
+<a href="{{url('/admin')}}" class="btn btn-info" role="button">Volver</a>
 </div>
                         </div>
                         </div>
