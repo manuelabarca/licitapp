@@ -1,3 +1,5 @@
+@if(Auth::check())
+
 @extends('layouts.app')
 
 @section('content')
@@ -45,26 +47,28 @@
                   @endif                  
                   @endforeach
                   <li class="list-group-item">Se han adjudicado<span class="badge">{{$contadorAdjudicadas}}</span></li> 
-                  </ul>
                   
-                  
-                   <!--Informacion de ordenes de compra-->
-                  <span>Ordenes de compra</span>
-                  <ul class="list-group">
-                   <li class="list-group-item">Han cambiado de estado<span class="badge">{{ $ordenes->Cantidad }}</span></li> 
-                 
-                  <?php $contadorEnviado = 0;?>
-                  @foreach($ordenes->Listado as $orden)
-                  @if($orden->CodigoEstado == 4)
-                  <?php $contadorEnviado++; ?>                 
+                                    <!--Contador desiertas-->
+                   <?php $contadorDesiertas = 0;?>
+                  @foreach($licitaciones->Listado as $licitacion)
+                  @if($licitacion->CodigoEstado == 7)
+                  <?php $contadorDesiertas++; ?>                 
                   @endif                  
                   @endforeach
-                   <li class="list-group-item">Se han enviado a proveedor<span class="badge">{{$contadorEnviado}}</span></li> 
-                 </ul>
-                  
-                </div>
+                  <li class="list-group-item">Se han abandonado<span class="badge">{{$contadorDesiertas}}</span></li> 
+                  </ul>
+
             </div>
+             <div id="container"></div>
         </div>
     </div>
 </div>
+
+ @include ('footer') 
 @endsection
+@else
+    {!! header("Location: https://licitapp.cl") !!}
+    {!! die() !!}
+@endif
+ 
+

@@ -9,8 +9,22 @@
                 <div class="panel-heading">Comparar con: 
                  {!! Form::open(array('url' => 'comparando', 'class' =>'form-group', 'method' => 'get'))!!}
                   {!! Form::text('codigo') !!}
-                  {!! Form::submit('Comparar') !!}
-                  {!! Form::close() !!}
+                   {{ Form::hidden('codigoExterno', $infolicitacion->CodigoExterno) }}
+                   {{ Form::hidden('nombre', $infolicitacion->Nombre) }}
+                   {{ Form::hidden('estado', $infolicitacion->CodigoEstado) }}
+                   {!! Form::submit('Comparar') !!}
+                   {{ Form::hidden('codigoorganismo', $infolicitacion->Comprador->CodigoOrganismo) }}
+                   {{ Form::hidden('nombreorganismo', $infolicitacion->Comprador->NombreOrganismo) }}
+                   {{ Form::hidden('contacto', $infolicitacion->EmailResponsableContrato) }}
+                   {{ Form::hidden('diascierre', $infolicitacion->DiasCierreLicitacion) }}
+                   {{ Form::hidden('montoestimado', $infolicitacion->MontoEstimado) }}
+                   {{ Form::hidden('cantidadproductos', $infolicitacion->Items->Cantidad) }}
+                   {{ Form::hidden('reclamos', $infolicitacion->CantidadReclamos) }}
+                   @foreach($infolicitacion->Items->Listado as $item)
+                   {{ Form::hidden('descripcion', $item->Descripcion) }}
+                   @endforeach
+                   {!! Form::close() !!}
+                  
                 </div>
                 <div class="panel-body">
                     @if (session('status'))
@@ -18,7 +32,9 @@
                             {{ session('status') }}
                         </div>
                     @endif
-        {{  Form::hidden('codigoExterno',"$infolicitacion->CodigoExterno") }}
+                
+       
+        
             <ul class="list-group">
             <li class="list-group-item list-group-item-info">Informacion de licitacion: {{$infolicitacion->CodigoExterno}} </li>
             <li class="list-group-item">Nombre<span class="badge" id="nombre">{{ $infolicitacion->Nombre }}</span></li>
@@ -44,6 +60,7 @@
                 }
 @endphp
 
+
                <li class="list-group-item">Comprador</li>
                <li class="list-group-item">Codigo de organismo publico<span class="badge">{{ $infolicitacion->Comprador->CodigoOrganismo }}</span></li>
                <li class="list-group-item">Nombre de organismo publico<span class="badge">{{ $infolicitacion->Comprador->NombreOrganismo }}</span></li>
@@ -56,7 +73,7 @@
                @if($infolicitacion->MontoEstimado == null)
                <li class="list-group-item">Valor estimado de licitacion<span class="badge">No informo monto</span></li>
                @else
-               <li class="list-group-item">Valor estimado de licitacio<span class="badge">{{ number_format($infolicitacion->MontoEstimado) }}</span></li>
+               <li class="list-group-item">Valor estimado de licitacion<span class="badge">{{ number_format($infolicitacion->MontoEstimado) }}</span></li>
                @endif
                <li class="list-group-item list-group-item-info">Productos</li>
                <li class="list-group-item">Cantidad de productos <span class="badge">{{ $infolicitacion->Items->Cantidad }}</span></li>
@@ -70,7 +87,7 @@
                <li class="list-group-item">Link a mercadopublico<span class="badge"><a href=" https://www.mercadopublico.cl/Procurement/Modules/RFB/DetailsAcquisition.aspx?idlicitacion={{$infolicitacion->CodigoExterno}}">Ver</a></span></li>
                <li class="list-group-item">Cantidad de reclamos<span class="badge">{{ $infolicitacion->CantidadReclamos }}</span></li>
                </ul>
-   
+  
 
                   
                     

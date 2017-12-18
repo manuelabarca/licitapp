@@ -11,8 +11,8 @@
 |
 */
 use Illuminate\Http\Request;
-
-
+use App\Notifications\Slack;
+use App\User;
 Auth::routes();
 Route::get('/', ['uses' => 'WelcomeController@index']);
 Route::get('/home', 'HomeController@index')->name('home');
@@ -25,28 +25,89 @@ Route::get('/seguir/{codigo}', ['uses' => 'LicitacionesController@seguir']);
 Route::get('/seguidas', ['uses' => 'LicitacionesController@seguidas']);
 /* Ruta para el backoffice */
 Route::get('/admin', ['uses' => 'HomeController@admin']);
-Route::get('/admin/usuarios/', ['uses' => 'UserController@index']);
-Route::get('/admin/usuarios/lista', ['uses' => 'UserController@lista']);
+//Route::get('/admin/usuarios/', ['uses' => 'UserController@index']);
 /*Ruta para buscar info de una licitacion en especifico*/
 
 Route::get('buscarL', ['uses' => 'CompararController@primerComparar']);
 
-/*Ruta de comparación*/
+/*Ruta para buscar licitaciones por palabra clave*/
+Route::get('buscaretiqueta',['uses' => 'LicitacionesController@buscarEtiqueta']);
+Route::get('buscarfecha',['uses' => 'LicitacionesController@filtroFechas']);
+
+/*Ruta de comparaciï¿½n*/
 Route::get('comparando', ['uses' => 'CompararController@comparandoLicitaciones']);
 Route::get('/licitaciones', ['uses' => 'LicitacionesController@todas']);
 
+/*Ordenes de compra*/
+
+Route::get('ordenes', ['uses' => 'OrdenesController@index']);
+
 /*Rutas CRUD Backoffice*/
 
-Route::get('/admin/usuarios/crear', ['uses' => 'UserController@crear']);
-/*Mostrar todos los usuarios*/
-Route::get('/usuarios', function(){
+Route::group(['prefix' => ''], function(){
+   Route::resource('admin/usuarios', 'UserController');
+});
 
-});
-/*Agregar un nuevo usuario*/
-Route::post('/usuario', function(){
- 
+/*Prueba de seguir con jquery*/
 
+Route::post('/seguir/{codigo}', [
+'as' => 'siguiendo',
+'uses' => 'LicitacionesController@seguir'
+]);
+
+/* Suscripcion premium*/
+
+Route::get('/suscripcion', function(){
+  return view('pago.index');
 });
-/*Eliminar un usuario*/
-Route::delete('/usuario/{id}', function(){
+
+/*Rutas empresas del estado*/
+
+Route::get('/empresas', ['uses' => 'OrganismoController@todos']);
+/* Ruta notificaciones instantaneas*/
+
+Route::get('/revisadas', function(){
+  auth()->user()->unreadNotifications->nRevisada();
 });
+
+/*Ruta para OCR*/
+Route::get('/ocr', ['uses' => 'OCRController@index']);
+/*Licitaciones destacadas, descargar*/
+Route::get('/herramientas', ['uses' => 'ArchivosController@index']);
+
+/*Ruta para grafico*/
+Route::get('/chart', ['uses' => 'graficoController@index']);
+
+/*Rutas CRUD Clientes*/
+
+Route::group(['prefix' => ''], function(){
+   Route::resource('clientes', 'ClienteController');
+});
+
+/*Rutas ver Clientes */
+
+Route::get('/clienteR/{id}', ['uses' => 'ClienteController@indexC']);
+Route::get('/clienteR/{id}', ['uses' => 'ClienteController@separarRubros']);
+
+/*Ruta para Highchart
+Route::get('listado_graficas', 'GraficasController@index');
+Route::get('grafica_registros/{anio}/{mes}', 'GraficasController@registros_mes');
+*/
+
+/*Ruta correos bienvenido*/
+
+Route::get('/video', function()
+{
+    $users = App\User::first();
+    $rubros = App\User::first();
+    $users->notify(new Slack($rubros));
+});
+
+/* Notificaciones crear*/
+
+Route::get('/notificaciones', ['uses' => 'UserController@irACrearNotificacion']);
+Route::get('crearlicitacion', ['uses' => 'UserController@crearNotificacion']);
+
+/*Convertir archivos*/
+
+Route::get('convertir', ['uses' => 'ArchivosController@index']);

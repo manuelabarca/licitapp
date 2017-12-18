@@ -8,14 +8,17 @@
                 <div class="panel-heading">Crear usuario</div>
 
                 <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ url('/usuario') }}">
+                    <form class="form-horizontal" method="POST" action="{{URL('admin/usuarios')}}{{isset($user) ? '/'. $user->id : ''}}">
                         {{ csrf_field() }}
+                        @if (isset($user))
+                            {{method_field('PUT')}}
+                        @endif
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">Nombre</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+                                <input id="name" type="text" class="form-control" name="name" value="{{  isset($user) ? $user->name : '' }}" required autofocus>
 
                                 @if ($errors->has('name'))
                                     <span class="help-block">
@@ -29,7 +32,7 @@
                             <label for="email" class="col-md-4 control-label">Correo electronico</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                                <input id="email" type="email" class="form-control" name="email" value="{{ isset($user) ? $user->email : '' }}" required>
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -43,7 +46,7 @@
                             <label for="password" class="col-md-4 control-label">Contrasena</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
+                                <input id="password" type="password" class="form-control" name="password" value="{{isset($user) ? $user->password : ''}}" required>
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">
@@ -57,7 +60,7 @@
                             <label for="password-confirm" class="col-md-4 control-label">Confirmar contrasena</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" value="{{isset($user) ? $user->password : ''}}" required>
                             </div>
                         </div>
                         
@@ -66,7 +69,7 @@
                             <label for="empresa" class="col-md-4 control-label">Empresa</label>
 
                             <div class="col-md-6">
-                                <input id="empresa" type="empresa" class="form-control" name="empresa" required>
+                                <input id="empresa" type="empresa" class="form-control" name="empresa" value="{{isset($user) ? $user->empresa : ''}}" required>
 
                                 @if ($errors->has('empresa'))
                                     <span class="help-block">
@@ -80,7 +83,7 @@
                             <label for="rubro" class="col-md-4 control-label">Rubros</label>
 
                             <div class="col-md-6">
-                                <input id="rubro" type="rubro" class="form-control" placeholder="Separa los rubros por una coma (ej: auto, salud)" name="rubro" required>
+                                <input id="rubro" type="rubro" class="form-control" placeholder="Separa los rubros por una coma (ej: auto, salud)" name="rubro"  value="{{isset($user) ? $user->rubro : ''}}" required>
 
                                 @if ($errors->has('rubro'))
                                     <span class="help-block">
@@ -93,11 +96,26 @@
                            <div class="form-group{{ $errors->has('estado') ? ' has-error' : '' }}">
 
                             <div class="col-md-6">
-                                <input id="estado" type="hidden" class="form-control"  name="estado" value="0" >
+                                <input id="estado" type="hidden" class="form-control"  name="estado" value="0" value="{{isset($user) ? $user->estado : ''}}" >
 
                                 @if ($errors->has('estado'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('estado') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <!-- Intermediario -->
+                        <div class="form-group{{ $errors->has('intermediario') ? ' has-error' : '' }}">
+                            <label for="intermediario" class="col-md-4 control-label">Eres intermediario?</label>
+                            <div class="col-md-6">
+                                <select name="intermediario">
+                                    <option value="1">Si</option>
+                                    <option value="0">No</option>
+                                </select>
+                                @if ($errors->has('intermediario'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('intermediario') }}</strong>
                                     </span>
                                 @endif
                             </div>

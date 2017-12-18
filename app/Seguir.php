@@ -6,5 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Seguir extends Model
 {
+  protected $table="seguirs";
     //
 }

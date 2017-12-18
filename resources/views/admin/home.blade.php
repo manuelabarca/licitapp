@@ -1,3 +1,4 @@
+@if(Auth::user()->estado == 3)
 @extends('layouts.app')
 
 @section('content')
@@ -24,3 +25,7 @@
                         </div>
 </div>
 @endsection
+@else
+    {!! header("Location: https://licitapp.cl") !!}
+    {!! die() !!}
+@endif

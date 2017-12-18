@@ -16,7 +16,11 @@
                    
                   <div class="list-group">
                       <a href="{{url('/comparar')}}" class="list-group-item">Comparar licitaciones</a>
-                      <a href="{{url('/descargarD')}}" class="list-group-item">Descargar documentos</a>
+                      <a href="{{url('/comparar')}}" class="list-group-item">Comparar empresas del estado</a>
+                      <a href="{{url('/convertir')}}" class="list-group-item">Convertir documentos</a>
+                      <a href="http://www.mercadopublico.cl/Portal/att.ashx?id=13" class="list-group-item">Descargar Licitaciones Destacadas</a>
+                      <a href="http://datosabiertos.chilecompra.cl/Data/Descargar?guid=28" class="list-group-item">Descargar todas las ordenes de compra</a>
+                      <a href="{{url('/notificaciones')}}" class="list-group-item">Crear notificaciones</a>
                       <a href="#" class="list-group-item">Pronto.. nueva herramienta</a>
 </div>
                         </div>

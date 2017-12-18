@@ -54,6 +54,7 @@ class RegisterController extends Controller
             'empresa' => 'required|string|max:255',
             'rubro' => 'required|string|min:1',
             'estado' => 'integer',
+            'intermediario' => 'required|integer',
             
         ]);
     }
@@ -73,8 +74,10 @@ class RegisterController extends Controller
             'empresa' => $data['empresa'],
             'rubro' => $data['rubro'],
             'estado' => $data['estado'],
+            'intermediario' => $data['intermediario'],
             
             
         ]);
+        auth()->user()->notify(new CierreLicitacion());
     }
 }

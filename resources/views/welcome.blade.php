@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
     <meta name="description" content="Licitapp, la forma sencilla de descubrir nuevas oportunidades de negocio reduciendo el tiempo, en los ciclos de búsqueda">
     <meta name="keywords"
           content="licitacion, licitaciones, chile licitacion, chile licitaciones, licitaciones chile, mercado, mercadopublico, licitapp, chilecompra, datosabierto">
